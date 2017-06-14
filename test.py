@@ -1,3 +1,5 @@
-x = lambda z: z+1
+import level
 
-print(x(4))
+lvl = level.Level()
+lvl.load_level("level1.txt")
+print(lvl)

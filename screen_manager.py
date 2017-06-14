@@ -16,6 +16,7 @@ def print_screen(lvl, player, message):
 
 
 lvl = level.Level()
+lvl.load_level("level1.txt")
 player = character.Character()
 
 key = print_screen(lvl, player, "")

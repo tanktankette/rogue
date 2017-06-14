@@ -39,7 +39,10 @@ class Character:
             self.pos_x = temp_x
             self.pos_y = temp_y
             if lvl.map[self.pos_x][self.pos_y][2]:
-                return lvl.map[self.pos_x][self.pos_y][2](self, lvl)
+                ret = lvl.map[self.pos_x][self.pos_y][2](self, lvl)
+                if lvl.map[self.pos_x][self.pos_y][3]:
+                    lvl.change(self.pos_x, self.pos_y)
+                return ret
             return ""
         else:
             return "That's a wall!"
