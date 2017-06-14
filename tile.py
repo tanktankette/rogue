@@ -1,0 +1,7 @@
+floor = (ord("."), True, None)
+wall = (ord("#"), False, None)
+lava = (ord("~"), True, lambda c, m: c.damage(10, "burned by lava"))
+sign = (ord("^"), True, lambda c, m: "To the south is a trap")
+heal = (ord("*"), True, lambda c, m: c.heal(10, "healed via divine intervention"))
+button = (ord("+"), True, lambda c, m: m.change(10, 10, floor))
+trap = (ord("."), True, lambda c, m: m.change(10, 10, lava))
