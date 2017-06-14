@@ -1,5 +1,3 @@
-import level
+t = [0, 1, 2, 3, 4, 5]
 
-lvl = level.Level()
-lvl.load_level("level1.txt")
-print(lvl)
+print(t[-1])

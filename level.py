@@ -1,5 +1,5 @@
 import tile
-
+from curses import color_pair
 
 class Level:
     def __init__(self):
@@ -23,7 +23,10 @@ class Level:
         x_index, y_index = 0, 0
         for x in self.map:
             for y in x:
-                yield y_index + 1, x_index + 1, y[0]
+                color = 2
+                if chr(y[0]) == "~":
+                    color = 1
+                yield y_index + 1, x_index + 1, y[0], color_pair(color)
                 y_index += 1
             y_index = 0
             x_index += 1
@@ -36,30 +39,20 @@ class Level:
         x_index, y_index = 0, 0
         with open(filename, "r") as opened_file:
             for line in opened_file:
-                if line[0] != "!":
-                    for c in line:
-                        if c == "#":
-                            self.map[x_index][y_index] = tile.wall
-                        if c == " " or c == ".":
-                            self.map[x_index][y_index] = tile.floor
-                        if c == "~":
-                            self.map[x_index][y_index] = tile.lava
-                        if c == "\n":
-                            pass
+                if line[0] != "!":  # Base level map: floors, walls, and lava
+                    for c in line[:-1]:
+                        self.map[x_index][y_index] = tile.get_tile(c)
                         x_index += 1
-                else:
+                    x_index = 0
+                    y_index += 1
+                else:  # Button or sign
                     params = line[1:-1].split(", ")
                     for x in [0, 1, 3, 4]:
                         params[x] = int(params[x])
-                    t = ""
-                    if params[5] == ".":
-                        t = tile.floor
-                    elif params[5] == "~":
-                        t = tile.lava
-                    elif len(params[5]) > 1:
-                        self.map[params[0]][params[1]] = tile.create_sign(params[5])
-                        continue
-                    self.map[params[0]][params[1]] = \
-                        tile.create_button(params[2], params[3], params[4], t)
-                x_index = 0
-                y_index += 1
+                    if len(params[5]) > 1:
+                        self.map[params[0]][params[1]] = \
+                            tile.create_sign(params[5])
+                    else:
+                        t = tile.get_tile(params[5])
+                        self.map[params[0]][params[1]] = tile.create_button(
+                            params[2], params[3], params[4], t)
