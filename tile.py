@@ -2,8 +2,9 @@
 
 floor = (ord("."), True, None, False)
 wall = (ord("#"), False, None, False)
+finish = (ord("W"), True, lambda c, m: c.win(), False)
 lava = (ord("~"), True, lambda c, m: c.damage(10, "burned by lava"), False)
-heal = (ord("*"), True, lambda c, m: c.heal(10, "magically healed"), True)
+heal = (ord("*"), True, lambda c, m: c.heal(10, "holy light heals you"), True)
 
 
 def create_button(ch, coords, t):
@@ -15,7 +16,7 @@ def create_sign(text):
 
 
 def get_tile(c):
-    if c == "#":
+    if c == "#" or c == "x":
         return wall
     if c == " " or c == ".":
         return floor
@@ -23,4 +24,6 @@ def get_tile(c):
         return lava
     if c == "*":
         return heal
+    if c == "W":
+        return finish
     return floor

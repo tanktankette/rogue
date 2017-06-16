@@ -1,5 +1,4 @@
-# TODO:
-
+from os import system
 import curses
 import level
 import character
@@ -33,8 +32,12 @@ try:
 
     key = print_screen(lvl, player, "")
 
-    while key != 27 and player.health > 0:
+    while key != 27 and player.health > 0 and not player.win:
         key = print_screen(lvl, player, player.move(key, lvl))
 finally:
     curses.endwin()
-    print(player.health)
+    system("clear")
+    if player.win:
+        print("You win!")
+    else:
+        print("Better luck next time :(")

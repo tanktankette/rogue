@@ -21,6 +21,7 @@ class Level:
         return r
 
     def yield_level(self):
+        """Yield the level one tile at a time for curses"""
         x_index, y_index = 0, 0
         for x in self.map:
             for y in x:
@@ -33,6 +34,7 @@ class Level:
             x_index += 1
 
     def change(self, coord: list, t=tile.floor):
+        """Change a tile (or tiles) of the map"""
         x = 0
         while x < len(coord):
             if self.map[coord[x]][coord[x+1]] is not tile.lava:
@@ -41,6 +43,7 @@ class Level:
         return "The walls shift"
 
     def load_level(self, filename):
+        """Load level from file"""
         x_index, y_index = 0, 0
         with open(filename, "r") as opened_file:
             for line in opened_file:
