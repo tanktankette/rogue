@@ -41,7 +41,7 @@ class Character:
             if lvl.map[self.pos_x][self.pos_y][2]:
                 ret = lvl.map[self.pos_x][self.pos_y][2](self, lvl)
                 if lvl.map[self.pos_x][self.pos_y][3]:
-                    lvl.change(self.pos_x, self.pos_y)
+                    lvl.change([self.pos_x, self.pos_y])
                 return ret
             return ""
         else:

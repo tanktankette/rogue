@@ -6,8 +6,8 @@ lava = (ord("~"), True, lambda c, m: c.damage(10, "burned by lava"), False)
 heal = (ord("*"), True, lambda c, m: c.heal(10, "magically healed"), True)
 
 
-def create_button(c, x, y, t):
-    return (ord(c), True, lambda c, m: m.change(x, y, t), True)
+def create_button(ch, coords, t):
+    return (ord(ch), True, lambda c, m: m.change(coords, t), True)
 
 
 def create_sign(text):

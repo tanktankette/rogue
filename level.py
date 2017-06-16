@@ -1,6 +1,7 @@
 import tile
 from curses import color_pair
 
+
 class Level:
     def __init__(self):
         self.map = []
@@ -31,8 +32,12 @@ class Level:
             y_index = 0
             x_index += 1
 
-    def change(self, x, y, t=tile.floor):
-        self.map[x][y] = t
+    def change(self, coord: list, t=tile.floor):
+        x = 0
+        while x < len(coord):
+            if self.map[coord[x]][coord[x+1]] is not tile.lava:
+                self.map[coord[x]][coord[x+1]] = t
+            x += 2
         return "The walls shift"
 
     def load_level(self, filename):
@@ -54,5 +59,10 @@ class Level:
                             tile.create_sign(params[5])
                     else:
                         t = tile.get_tile(params[5])
+                        coord = [params[3], params[4]]
+                        if len(params) > 6:
+                            for x in params[6:]:
+                                x = int(x)
+                                coord.append(x)
                         self.map[params[0]][params[1]] = tile.create_button(
-                            params[2], params[3], params[4], t)
+                            params[2], coord, t)
