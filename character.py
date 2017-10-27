@@ -18,10 +18,10 @@ class Character:
         self.health += amount
         return f"A {description} for {amount} damage"
 
-    def win(self):
+    def finish(self):
         """VICTORY!!!"""
         self.win = True
-        return "YAY"
+        return "YAY!   -Press any button to quit"
 
     def parse_move(self, key):
         """Parse out a key press into the resulting new position"""

@@ -2,7 +2,7 @@
 
 floor = (ord("."), True, None, False)
 wall = (ord("#"), False, None, False)
-finish = (ord("W"), True, lambda c, m: c.win(), False)
+finish = (ord("W"), True, lambda c, m: c.finish(), False)
 lava = (ord("~"), True, lambda c, m: c.damage(10, "burned by lava"), False)
 heal = (ord("*"), True, lambda c, m: c.heal(10, "holy light heals you"), True)
 

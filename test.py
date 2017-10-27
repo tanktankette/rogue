@@ -1,3 +1,2 @@
-t = [0, 1, 2, 3, 4, 5]
 
-print(t[-1])
+print(list(map(lambda x: x*2, range(10))))
